@@ -6968,3 +6968,89 @@ class TestProfileInformation(testtools.TestCase):
 
         self.assertTrue(a != b)
         self.assertTrue(b != a)
+
+
+class TestValidationInformation(testtools.TestCase):
+
+    def setUp(self):
+        super(TestValidationInformation, self).setUp()
+
+    def tearDown(self):
+        super(TestValidationInformation, self).tearDown()
+
+    def test_invalid_validation_authority_type(self):
+        """
+        Test that a TypeError is raised when an invalid value is used to set
+        the validation authority type of a ValidationInformation structure.
+        """
+        kwargs = {"validation_authority_type": "invalid"}
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority type must be a ValidationAuthorityType "
+            "enumeration.",
+            objects.ValidationInformation,
+            **kwargs
+        )
+
+        args = (
+            objects.ValidationInformation(),
+            "validation_authority_type",
+            "invalid"
+        )
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority type must be a ValidationAuthorityType "
+            "enumeration.",
+            setattr,
+            *args
+        )
+
+    def test_invalid_validation_authority_country(self):
+        """
+        Test that a TypeError is raised when an invalid value is used to set
+        the validation authority country of a ValidationInformation structure.
+        """
+        kwargs = {"validation_authority_country": 0}
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority country must be a string.",
+            objects.ValidationInformation,
+            **kwargs
+        )
+
+        args = (
+            objects.ValidationInformation(),
+            "validation_authority_country",
+            0
+        )
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority country must be a string.",
+            setattr,
+            *args
+        )
+
+    def test_invalid_validation_authority_uri(self):
+        """
+        Test that a TypeError is raised when an invalid value is used to set
+        the validation authority URI of a ValidationInformation structure.
+        """
+        kwargs = {"validation_authority_uri": 0}
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority URI must be a string.",
+            objects.ValidationInformation,
+            **kwargs
+        )
+
+        args = (
+            objects.ValidationInformation(),
+            "validation_authority_uri",
+            0
+        )
+        self.assertRaisesRegex(
+            TypeError,
+            "The validation authority URI must be a string.",
+            setattr,
+            *args
+        )
